@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>{{ title }}</h2>
+
+{% if Craws %}
+    <ul>
+        {% for Craw in Craws %}
+        <li>{{ Craw.snum }} : {{ Craw.id }} : {{ Craw.lnmae }} : {{ Craw.title }} : {{ Craw.degree }} : {{ Craw.acheck }} : {{ Craw.con }} : {{ Craw.sdate }} : {{ Craw.edate }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h2>no board list</h2>
+{% endif %}
+<a href="{% url 'main:craw' %}">
+	크롤링 실행
+</a>
+</body>
+</html>
