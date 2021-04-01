@@ -1,23 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {% load static %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <!-- fullcalendar CSS -->
+    <link rel="stylesheet" href="{% static 'lib/main.css' %}">
+    <script src='/static/lib/main.js'></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>inhatc Calendar</title>
 </head>
 <body>
-    <h2>{{ title }}</h2>
-
-{% if Craws %}
-    <ul>
-        {% for Craw in Craws %}
-        <li>{{ Craw.snum }} : {{ Craw.id }} : {{ Craw.lnmae }} : {{ Craw.title }} : {{ Craw.degree }} : {{ Craw.acheck }} : {{ Craw.con }} : {{ Craw.sdate }} : {{ Craw.edate }}</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <h2>no board list</h2>
-{% endif %}
-<a href="{% url 'main:craw' %}">
-	크롤링 실행
-</a>
+<!-- ------------------------------- [edit] -------------------------------- -->
+<!-- 네비게이션바 -->
+{% include "main/navbar.html" %}
+<!-- ----------------------------------------------------------------------- -->
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<!-- jQuery JS -->
+<script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 </body>
 </html>

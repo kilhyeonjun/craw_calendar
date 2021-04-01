@@ -1,5 +1,17 @@
 from django import forms
 
-class NameForm(forms.Form):
-    your_id = forms.CharField(label='Your id id', max_length=8)
-    your_pw = forms.CharField(label='Your pw pw', max_length=20)
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )

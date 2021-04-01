@@ -1,0 +1,55 @@
+{% extends "main/index.html" %}
+{% block content %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var initialLocaleCode = 'kr';
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+
+      headerToolbar: {
+        start: "",
+        center: "prev title next",
+        end: "today",
+      },
+
+      locale: initialLocaleCode,
+
+
+      //높이설정
+      contentHeight: 600,
+      fixedWeekCount: false,
+      showNonCurrentDates: true,
+      eventColor : '#808080',
+
+
+
+      events: {
+        url: "http://localhost:8000/craw_list_db",
+        method: "GET",
+        failure: function () {
+          alert("이벤트를 못가져왔습니다");
+        },
+      }
+      , eventClick: function(info) {
+      var eventObj = info.event;
+      var acheck = ''
+      if (eventObj.extendedProps.acheck == '과제제출'){
+        acheck = '제출완료'
+      }else{
+        acheck = '미제출'
+      }
+        alert(
+          eventObj.start + '  ~  ' + eventObj.end + '\n\n' +
+          eventObj.title + '  ' + acheck + '\n\n\n'
+          + eventObj.extendedProps.con
+        );
+
+      }
+    });
+    calendar.render();
+  });
+
+</script>
+<div id='calendar'></div>
+{% endblock %}
