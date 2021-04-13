@@ -103,7 +103,7 @@ def craw_list_db(request):
     Craws = Craw.objects.all()
     craw_lists = []
     for craw in Craws:
-        if craw.degree != "[마감]":
+        if (craw.degree != "[마감]") and (craw.acheck != "제출정보보기"):
             craw_list = {}
             craw_list["title"]=craw.lname
             craw_list["start"]=(craw.sdate).strftime('%Y-%m-%dT%H:%M:%S')
@@ -112,6 +112,10 @@ def craw_list_db(request):
                 'lname' : craw.title,
                 'acheck ': craw.acheck ,
                 'con': craw.con,
+
             }
             craw_lists.append(craw_list)
     return JsonResponse(craw_lists, safe=False)
+
+def test(request):
+    return render(request, 'main/test.html')

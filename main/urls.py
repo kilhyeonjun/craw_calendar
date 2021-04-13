@@ -13,6 +13,7 @@ urlpatterns = [
     path('craw_list_db', views.craw_list_db, name='craw_list_db'),
     path('login', views.login, name='login'),
     path('logout', views.logout, name='logout'),
+    path('test', views.test, name='test'),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_URL)

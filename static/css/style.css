@@ -29,3 +29,8 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+.fc .fc-button-primary{
+    background-color: #F8F9FA
+}
+.fc-day-number.fc-sat.fc-past { color:#0000FF; }     /* 토요일 */
+.fc-day-number.fc-sun.fc-past { color:#FF0000; }    /* 일요일 */

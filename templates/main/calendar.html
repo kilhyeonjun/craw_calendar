@@ -1,6 +1,40 @@
 {% extends "main/index.html" %}
 {% block content %}
+<style type="text/css">
+
+    .layer-popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 100;
+    }
+
+    .layer-popup.show {
+      display: block;
+    }
+
+    .modal-dialog {
+      width: 300px auto;
+      margin: 40px auto;
+      background-color: #fff;
+    }
+
+    .modal-content {
+      padding:10px 15px auto;
+      line-height: 100px auto;
+    }
+</style>
+
 <script>
+    // 외부영역 클릭 시 팝업 닫기
+    $(document).mouseup(function (e){
+        $('#layer-popup').hide();
+    });
+
   document.addEventListener('DOMContentLoaded', function() {
     var initialLocaleCode = 'kr';
     var calendarEl = document.getElementById('calendar');
@@ -20,7 +54,7 @@
       contentHeight: 600,
       fixedWeekCount: false,
       showNonCurrentDates: true,
-      eventColor : '#808080',
+      eventColor : '#eeeeee',
 
 
 
@@ -32,19 +66,11 @@
         },
       }
       , eventClick: function(info) {
-      var eventObj = info.event;
-      var acheck = ''
-      if (eventObj.extendedProps.acheck == '과제제출'){
-        acheck = '제출완료'
-      }else{
-        acheck = '미제출'
-      }
-        alert(
-          eventObj.start + '  ~  ' + eventObj.end + '\n\n' +
-          eventObj.title + '  ' + acheck + '\n\n\n'
-          + eventObj.extendedProps.con
-        );
-
+        var eventObj = info.event;
+        $("#title").text(eventObj.title);
+        $("#lname").text(eventObj.extendedProps.lname);
+        $("#con").text(eventObj.extendedProps.con);
+        $('#layer-popup').show();
       }
     });
     calendar.render();
@@ -52,4 +78,29 @@
 
 </script>
 <div id='calendar'></div>
+<div class="container">
+  <div class="layer-popup" id="layer-popup">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <table data-toggle="table" class="table table-bordered">
+          <thead>
+            <tr>
+              <th id="title">강의명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="lname">과제명</td>
+
+            </tr>
+            <tr>
+              <td id="con">내용</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

@@ -83,11 +83,11 @@ DATABASES = {
 
         'NAME': 'crawdb',
 
-        'USER': 'craw',
+        'USER': 'root',
 
-        'PASSWORD': '1234',
+        'PASSWORD': 'psg980727!',
 
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
 
         'PORT': ''
 

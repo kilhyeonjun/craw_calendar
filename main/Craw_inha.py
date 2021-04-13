@@ -4,7 +4,6 @@ import selenium
 from selenium import webdriver
 from selenium.webdriver.support.ui import Select
 import time
-import pymysql  # pymysql 임포트
 import bs4
 
 class Craw_inha:
@@ -45,10 +44,10 @@ class Craw_inha:
         self.popx()
         try:
             if (self.driver.find_element_by_id('id')):
+                self.driver.quit()
                 return "로그인 실패"
         except:
             return "로그인 성공"
-
         
         
 
@@ -137,21 +136,23 @@ class Craw_inha:
                 # 리스트로 저장
 
                 list2.append(list1)
+            self.driver.quit()
             return list2
         except:
             print("err")
+            self.driver.quit()
             return "err"
 
     def popx(self):
         try:
             # 10초까지 파싱 시간 기다리기
             self.driver.implicitly_wait(3)  # seconds
-            # 팝업창 닫기
-            self.driver.switch_to_window(self.driver.window_handles[1])
-            self.driver.close()
-            self.driver.switch_to_window(self.driver.window_handles[0])
-            # dialog 닫기
-
+            while(self.driver.window_handles[1]):
+                # 팝업창 닫기
+                self.driver.switch_to_window(self.driver.window_handles[1])
+                self.driver.close()
+                self.driver.switch_to_window(self.driver.window_handles[0])
+                # dialog 닫기
         except:
             print("no popup")
         try:
